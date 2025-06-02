@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CV Online - Rolando Ahuja Martínez
 
-## Getting Started
+Este es un sitio web personal para mostrar mi CV profesional de manera interactiva y moderna.
 
-First, run the development server:
+## 🚀 Tecnologías Utilizadas
 
+- **Next.js 14** - Framework de React con App Router
+- **Tailwind CSS** - Framework de CSS para estilos
+- **DaisyUI** - Componentes UI para Tailwind CSS
+- **Lucide React** - Iconos modernos
+- **Vercel** - Hosting y despliegue
+
+## 📋 Características
+
+- Diseño responsive que se adapta a todos los dispositivos
+- Dos vistas: Perfil Profesional e Historial Cronológico
+- Interfaz moderna con tema corporativo
+- Optimizado para impresión
+- Carga rápida y SEO optimizado
+
+## 🛠️ Instalación Local
+
+1. Clona el repositorio:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd ~/projects/cv
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instala las dependencias:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+3. Ejecuta el servidor de desarrollo:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-## Learn More
+## 📦 Estructura del Proyecto
 
-To learn more about Next.js, take a look at the following resources:
+```
+cv/
+├── app/
+│   ├── components/
+│   │   └── CardCV.jsx      # Componente principal del CV
+│   ├── globals.css         # Estilos globales
+│   ├── layout.js          # Layout principal
+│   ├── loading.js         # Página de carga
+│   ├── not-found.js       # Página 404
+│   └── page.js            # Página principal
+├── public/                # Archivos estáticos
+├── tailwind.config.mjs    # Configuración de Tailwind
+└── package.json           # Dependencias del proyecto
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Despliegue en Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Sube tu código a GitHub
+2. Ve a [vercel.com](https://vercel.com)
+3. Importa tu repositorio
+4. Despliega sin cambiar ninguna configuración
 
-## Deploy on Vercel
+## 🌐 Configuración del Dominio
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Una vez desplegado en Vercel:
+1. Ve a Settings > Domains en tu proyecto de Vercel
+2. Agrega tu dominio personalizado
+3. Configura los DNS en tu proveedor (Namecheap)
+4. Espera la propagación (hasta 24 horas)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📱 Contacto
+
+- **Email**: ahuja@hush.com
+- **Teléfono**: 867-181-2166
+- **Ubicación**: Nuevo Laredo, Tamaulipas
+
+---
+
+Desarrollado con 💙 por Rolando Ahuja
