@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Briefcase, Award, Book, Calendar, MapPin, Mail, Phone, 
   Languages, User, CheckCircle, FileText, Wrench, 
@@ -10,6 +10,72 @@ import {
 // Import content files
 import { contentEng } from './content/content-eng';
 import { contentEsp } from './content/content-esp';
+
+// Typewriter Animation Component
+function TypewriterText() {
+  const words = ['Language', 'Idioma'];
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const [charIndex, setCharIndex] = useState(0);
+  const [showCursor, setShowCursor] = useState(true);
+  const [isWaiting, setIsWaiting] = useState(false);
+
+  useEffect(() => {
+    if (isWaiting) return; // Don't do anything while waiting
+    
+    const currentWord = words[currentWordIndex];
+    
+    const timer = setTimeout(() => {
+      if (isTyping) {
+        // Typing animation
+        if (charIndex < currentWord.length) {
+          setCurrentText(currentWord.slice(0, charIndex + 1));
+          setCharIndex(prev => prev + 1);
+        } else {
+          // Word is complete, wait then start deleting
+          setIsWaiting(true);
+          setTimeout(() => {
+            setIsWaiting(false);
+            setIsTyping(false);
+          }, 2000);
+        }
+      } else {
+        // Deleting animation
+        if (charIndex > 0) {
+          setCurrentText(currentWord.slice(0, charIndex - 1));
+          setCharIndex(prev => prev - 1);
+        } else {
+          // Word is fully deleted, switch to next word and start typing
+          setCurrentWordIndex(prev => (prev + 1) % words.length);
+          setCharIndex(0);
+          setCurrentText('');
+          setIsTyping(true);
+        }
+      }
+    }, isTyping ? 120 : 80); // Typing speed: 120ms, Deleting speed: 80ms
+
+    return () => clearTimeout(timer);
+  }, [currentWordIndex, charIndex, isTyping, isWaiting, words]);
+
+  // Cursor blinking effect
+  useEffect(() => {
+    const cursorTimer = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 500);
+
+    return () => clearInterval(cursorTimer);
+  }, []);
+
+  return (
+    <span className="min-w-[80px] text-left font-mono">
+      {currentText}
+      <span className={`transition-opacity duration-100 ${showCursor ? 'opacity-100' : 'opacity-0'}`}>
+        |
+      </span>
+    </span>
+  );
+}
 
 export default function CardCV() {
   const [activePage, setActivePage] = useState('principal');
@@ -27,10 +93,10 @@ export default function CardCV() {
       <div className="bg-gray-50 p-4 flex justify-end border-b">
         <button 
           onClick={toggleLanguage}
-          className="btn btn-sm btn-outline btn-primary hover:bg-blue-600 hover:text-white transition-colors"
+          className="btn btn-sm btn-outline btn-primary hover:bg-blue-600 hover:text-white transition-colors flex items-center"
         >
-          <Globe size={16} className="mr-2" />
-          {content.languageToggle}
+          <Globe size={16} className="mr-2 flex-shrink-0" />
+          <TypewriterText />
         </button>
       </div>
       
@@ -59,22 +125,33 @@ export default function CardCV() {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="bg-gray-50 border-b">
-        <div className="flex">
+      <div className="bg-gray-100 px-8 pt-4">
+        <div className="flex space-x-1 -mb-px">
           <button 
             onClick={() => setActivePage('principal')}
-            className={`px-6 py-4 font-semibold transition-colors ${activePage === 'principal' ? 'bg-white text-blue-700 border-b-3 border-blue-700' : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'}`}
+            className={`relative px-6 py-3 font-semibold rounded-t-lg transition-all duration-200 ${
+              activePage === 'principal' 
+                ? 'bg-white text-blue-700 shadow-md border-t-2 border-l border-r border-blue-700 border-b-white z-10' 
+                : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-800 border border-gray-300'
+            }`}
           >
             {content.tabs.profile}
           </button>
           <button 
             onClick={() => setActivePage('historial')}
-            className={`px-6 py-4 font-semibold transition-colors ${activePage === 'historial' ? 'bg-white text-blue-700 border-b-3 border-blue-700' : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'}`}
+            className={`relative px-6 py-3 font-semibold rounded-t-lg transition-all duration-200 ${
+              activePage === 'historial' 
+                ? 'bg-white text-blue-700 shadow-md border-t-2 border-l border-r border-blue-700 border-b-white z-10' 
+                : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-800 border border-gray-300'
+            }`}
           >
             {content.tabs.history}
           </button>
         </div>
       </div>
+      
+      {/* Tab content area with complete border */}
+      <div className="bg-white border-t border-gray-300"></div>
 
       {activePage === 'principal' ? (
         <div className="p-8 max-w-5xl mx-auto space-y-8">
@@ -110,10 +187,29 @@ export default function CardCV() {
 
           {/* Education, Languages & Professional Competencies - Two Column Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Left Column */}
+            {/* Left Column - Professional Competencies (Quadrants II & III) */}
+            <div>
+              {/* Professional Competencies */}
+              <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-200 h-full">
+                <div className="flex items-center mb-4">
+                  <Award size={22} className="text-blue-700 mr-3" />
+                  <h3 className="text-xl font-bold text-gray-800">{content.sections.competencies.title}</h3>
+                </div>
+                <div className="grid grid-cols-1 gap-3">
+                  {content.sections.competencies.items.map((comp, index) => (
+                    <div key={index} className="flex items-center">
+                      <CheckCircle size={16} className="text-blue-700 mr-3 flex-shrink-0" />
+                      <span className="text-gray-700">{comp}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Education & Languages (Quadrants I & IV) */}
             <div className="space-y-8">
-              {/* Education */}
-              <div>
+              {/* Education (Quadrant I) */}
+              <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-200">
                 <div className="flex items-center mb-4">
                   <Book size={22} className="text-blue-700 mr-3" />
                   <h3 className="text-xl font-bold text-gray-800">{content.sections.education.title}</h3>
@@ -125,8 +221,8 @@ export default function CardCV() {
                 </div>
               </div>
               
-              {/* Languages */}
-              <div>
+              {/* Languages (Quadrant IV) */}
+              <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-200">
                 <div className="flex items-center mb-4">
                   <Languages size={22} className="text-blue-700 mr-3" />
                   <h3 className="text-xl font-bold text-gray-800">{content.sections.languages.title}</h3>
@@ -136,25 +232,6 @@ export default function CardCV() {
                     <div key={index}>
                       <div className="font-semibold text-gray-800">{lang.language}</div>
                       <div className="text-gray-600">{lang.level}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column */}
-            <div>
-              {/* Professional Competencies */}
-              <div>
-                <div className="flex items-center mb-4">
-                  <Award size={22} className="text-blue-700 mr-3" />
-                  <h3 className="text-xl font-bold text-gray-800">{content.sections.competencies.title}</h3>
-                </div>
-                <div className="grid grid-cols-1 gap-3">
-                  {content.sections.competencies.items.map((comp, index) => (
-                    <div key={index} className="flex items-center">
-                      <CheckCircle size={16} className="text-blue-700 mr-3 flex-shrink-0" />
-                      <span className="text-gray-700">{comp}</span>
                     </div>
                   ))}
                 </div>

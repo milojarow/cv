@@ -28,20 +28,28 @@ export const contentEng = {
           description: "Process analysis and optimization, value stream mapping, parameter control"
         },
         {
-          name: "Quality Systems",
-          description: "Core Tools (PFMEA, Control Plan, Flow Chart), 8D's, Ishikawa, 5 Why's"
+          name: "Quality Systems & Problem Solving",
+          description: "Core Tools (PFMEA, Control Plan, Flow Chart), 8D's, Ishikawa, 5 Why's, Root Cause Analysis"
         },
         {
-          name: "Technical Design",
-          description: "Solid Edge, 3D part design, GD&T, fixtures and adaptations"
+          name: "Engineering Design & CAD",
+          description: "Solid Edge, SolidWorks, 3D part design, GD&T, fixtures and adaptations"
         },
         {
-          name: "System Monitoring",
-          description: "Critical parameter analysis, temperature profiles, technical documentation"
+          name: "Industrial Automation",
+          description: "PLC Programming, Robotics, Robot Control, Automation systems, Mechatronics integration"
         },
         {
-          name: "Computer Systems",
-          description: "Technical support, network configuration, user administration"
+          name: "Programming & Software Development",
+          description: "JavaScript, C#, MATLAB, Bash Scripting, HTML/CSS, Automated Software Testing"
+        },
+        {
+          name: "System Monitoring & Electronics",
+          description: "Critical parameter analysis, temperature profiles, technical documentation, Electronics troubleshooting"
+        },
+        {
+          name: "Computer Systems & Infrastructure",
+          description: "Linux, Technical support, Hardware installation, Network configuration, Computer repair"
         }
       ]
     },
@@ -70,12 +78,14 @@ export const contentEng = {
     competencies: {
       title: "PROFESSIONAL COMPETENCIES",
       items: [
-        "Problem solving",
-        "Critical analysis",
-        "Adaptability",
-        "Work under pressure",
-        "Effective communication",
-        "Continuous improvement"
+        "Cross-functional team leadership",
+        "Strategic process thinking",
+        "Stakeholder management",
+        "Change management & implementation",
+        "Training & knowledge transfer",
+        "Performance optimization mindset",
+        "Results-driven decision making",
+        "Technical communication & documentation"
       ]
     },
     

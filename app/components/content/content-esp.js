@@ -28,20 +28,28 @@ export const contentEsp = {
           description: "Análisis y optimización de procesos, mapeo de flujo de valor, control de parámetros"
         },
         {
-          name: "Sistemas de Calidad",
-          description: "Herramientas Core (PFMEA, Control Plan, Flow Chart), 8D's, Ishikawa, 5 Why's"
+          name: "Sistemas de Calidad y Resolución de Problemas",
+          description: "Herramientas Core (PFMEA, Control Plan, Flow Chart), 8D's, Ishikawa, 5 Why's, Análisis de Causa Raíz"
         },
         {
-          name: "Diseño Técnico",
-          description: "Solid Edge, diseño de piezas 3D, GD&T, fixtures y adaptaciones"
+          name: "Diseño de Ingeniería y CAD",
+          description: "Solid Edge, SolidWorks, diseño de piezas 3D, GD&T, fixtures y adaptaciones"
         },
         {
-          name: "Monitoreo de Sistemas",
-          description: "Análisis de parámetros críticos, perfiles de temperatura, documentación técnica"
+          name: "Automatización Industrial",
+          description: "Programación PLC, Robótica, Control de Robots, Sistemas de automatización, Integración mecatrónica"
         },
         {
-          name: "Sistemas Computacionales",
-          description: "Soporte técnico, configuración de redes, administración de usuarios"
+          name: "Programación y Desarrollo de Software",
+          description: "JavaScript, C#, MATLAB, Bash Scripting, HTML/CSS, Pruebas automatizadas de software"
+        },
+        {
+          name: "Monitoreo de Sistemas y Electrónica",
+          description: "Análisis de parámetros críticos, perfiles de temperatura, documentación técnica, Resolución de problemas electrónicos"
+        },
+        {
+          name: "Sistemas Computacionales e Infraestructura",
+          description: "Linux, Soporte técnico, Instalación de hardware, Configuración de redes, Reparación de computadoras"
         }
       ]
     },
@@ -70,12 +78,14 @@ export const contentEsp = {
     competencies: {
       title: "COMPETENCIAS PROFESIONALES",
       items: [
-        "Resolución de problemas",
-        "Análisis crítico",
-        "Adaptabilidad",
-        "Trabajo bajo presión",
-        "Comunicación efectiva",
-        "Mejora continua"
+        "Liderazgo de equipos multidisciplinarios",
+        "Pensamiento estratégico de procesos",
+        "Gestión de stakeholders",
+        "Gestión e implementación de cambios",
+        "Capacitación y transferencia de conocimiento",
+        "Mentalidad de optimización de rendimiento",
+        "Toma de decisiones orientada a resultados",
+        "Comunicación técnica y documentación"
       ]
     },
     
