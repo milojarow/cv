@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { 
   Briefcase, Award, Book, Calendar, MapPin, Mail, Phone, 
   Languages, User, CheckCircle, FileText, Wrench, 
-  ChevronRight, Clock, Globe
+  ChevronRight, Clock, Globe, Grid, List, 
+  Eye, ExternalLink, Download
 } from 'lucide-react';
 
 // Import content files
@@ -12,8 +13,8 @@ import { contentEng } from './content/content-eng';
 import { contentEsp } from './content/content-esp';
 
 // Typewriter Animation Component
-function TypewriterText() {
-  const words = ['Language', 'Idioma'];
+function TypewriterText({ currentLanguage }) {
+  const words = currentLanguage === 'eng' ? ['Language', 'Idioma'] : ['Idioma', 'Language'];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
@@ -68,8 +69,10 @@ function TypewriterText() {
   }, []);
 
   return (
-    <span className="min-w-[80px] text-left font-mono">
-      {currentText}
+    <span className="inline-flex items-center justify-center w-[80px] text-center">
+      <span className="inline-block w-[70px] text-center">
+        {currentText || '\u00A0'}
+      </span>
       <span className={`transition-opacity duration-100 ${showCursor ? 'opacity-100' : 'opacity-0'}`}>
         |
       </span>
@@ -80,6 +83,7 @@ function TypewriterText() {
 export default function CardCV() {
   const [activePage, setActivePage] = useState('principal');
   const [language, setLanguage] = useState('eng');
+  const [certificateViewMode, setCertificateViewMode] = useState('tiles');
   
   const content = language === 'eng' ? contentEng : contentEsp;
 
@@ -88,20 +92,24 @@ export default function CardCV() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
+    <div className="max-w-6xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden cv-card">
       {/* Language Toggle Button */}
-      <div className="bg-gray-50 p-4 flex justify-end border-b">
-        <button 
-          onClick={toggleLanguage}
-          className="btn btn-sm btn-outline btn-primary hover:bg-blue-600 hover:text-white transition-colors flex items-center"
-        >
-          <Globe size={16} className="mr-2 flex-shrink-0" />
-          <TypewriterText />
-        </button>
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 flex justify-end border-b border-blue-200 language-toggle">
+        <div className="relative">
+          <button 
+            onClick={toggleLanguage}
+            className="group relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-blue-700 bg-white border border-blue-300 rounded-lg hover:bg-blue-700 hover:text-white hover:border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 shadow-sm hover:shadow-md min-w-[140px]"
+          >
+            <Globe size={16} className="mr-2 flex-shrink-0 group-hover:rotate-180 transition-transform duration-300" />
+            <span className="font-mono text-sm tracking-wide">
+              <TypewriterText currentLanguage={language} />
+            </span>
+          </button>
+        </div>
       </div>
       
       {/* Header Section */}
-      <div className="bg-blue-800 text-white p-8">
+      <div className="bg-blue-800 text-white p-8 rounded-t-lg print-header">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
           <div>
             <h1 className="text-4xl font-bold tracking-tight mb-2">{content.header.name}</h1>
@@ -124,8 +132,8 @@ export default function CardCV() {
         </div>
       </div>
 
-      {/* Navigation Tabs */}
-      <div className="bg-gray-100 px-8 pt-4">
+            {/* Navigation Tabs */}
+      <div className="bg-gray-100 px-8 pt-4 tab-navigation">
         <div className="flex space-x-1 -mb-px">
           <button 
             onClick={() => setActivePage('principal')}
@@ -147,16 +155,26 @@ export default function CardCV() {
           >
             {content.tabs.history}
           </button>
+          <button 
+            onClick={() => setActivePage('certificates')}
+            className={`relative px-6 py-3 font-semibold rounded-t-lg transition-all duration-200 ${
+              activePage === 'certificates' 
+                ? 'bg-white text-blue-700 shadow-md border-t-2 border-l border-r border-blue-700 border-b-white z-10' 
+                : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-800 border border-gray-300'
+            }`}
+          >
+            {content.tabs.certificates}
+          </button>
         </div>
       </div>
-      
-      {/* Tab content area with complete border */}
-      <div className="bg-white border-t border-gray-300"></div>
 
-      {activePage === 'principal' ? (
-        <div className="p-8 max-w-5xl mx-auto space-y-8">
+      {/* Tab content area with complete border */}
+      <div className="bg-white border-t border-gray-300 tab-content-border"></div>
+
+      {activePage === 'principal' && (
+        <div className="p-8 max-w-5xl mx-auto space-y-8 print:!block print:max-w-none">
           {/* Professional Summary */}
-          <div>
+          <div className="print-section">
             <div className="flex items-center mb-4">
               <User size={22} className="text-blue-700 mr-3" />
               <h3 className="text-xl font-bold text-gray-800">{content.sections.profile.title}</h3>
@@ -325,11 +343,15 @@ export default function CardCV() {
             </div>
           </div>
         </div>
-      ) : (
+      )}
+      
+      {activePage === 'historial' && (
         // Timeline Page
-        <div className="p-8">
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">{content.timeline.title}</h3>
-          <p className="text-gray-600 mb-8 text-lg">{content.timeline.subtitle}</p>
+        <div className="p-8 print:!block">
+          <div className="print-break-before">
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">{content.timeline.title}</h3>
+            <p className="text-gray-600 mb-8 text-lg">{content.timeline.subtitle}</p>
+          </div>
           
           <div className="relative">
             {/* Timeline line positioned exactly through the center of the blue circles */}
@@ -361,8 +383,189 @@ export default function CardCV() {
         </div>
       )}
 
+      {activePage === 'certificates' && (
+        // Certificates Page
+        <div className="p-8 print:!block">
+          <div className="print-break-before">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8">
+              <div>
+                <div className="flex items-center mb-4">
+                  <Award size={28} className="text-blue-700 mr-3" />
+                  <h3 className="text-2xl font-bold text-gray-800">{content.sections.certificates.title}</h3>
+                </div>
+                <p className="text-gray-600 text-lg">{content.sections.certificates.description}</p>
+              </div>
+              
+              {/* View Mode Toggle */}
+              <div className="flex items-center space-x-2 bg-gray-100 p-2 rounded-lg view-mode-toggle">
+                <button 
+                  onClick={() => setCertificateViewMode('list')}
+                  className={`p-2 rounded transition-colors ${
+                    certificateViewMode === 'list' 
+                      ? 'bg-blue-700 text-white' 
+                      : 'text-gray-600 hover:bg-gray-200'
+                  }`}
+                  title={content.sections.certificates.viewModes.list}
+                >
+                  <List size={18} />
+                </button>
+                <button 
+                  onClick={() => setCertificateViewMode('tiles')}
+                  className={`p-2 rounded transition-colors ${
+                    certificateViewMode === 'tiles' 
+                      ? 'bg-blue-700 text-white' 
+                      : 'text-gray-600 hover:bg-gray-200'
+                  }`}
+                  title={content.sections.certificates.viewModes.tiles}
+                >
+                  <Grid size={18} />
+                </button>
+                <button 
+                  onClick={() => setCertificateViewMode('large')}
+                  className={`p-2 rounded transition-colors ${
+                    certificateViewMode === 'large' 
+                      ? 'bg-blue-700 text-white' 
+                      : 'text-gray-600 hover:bg-gray-200'
+                  }`}
+                  title={content.sections.certificates.viewModes.large}
+                >
+                  <Eye size={18} />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Certificates Grid */}
+          <div className={`grid gap-6 certificate-grid ${
+            certificateViewMode === 'list' 
+              ? 'grid-cols-1' 
+              : certificateViewMode === 'tiles' 
+              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+              : 'grid-cols-1 lg:grid-cols-2'
+          }`}>
+            {content.sections.certificates.items.map((cert, index) => (
+              <div key={cert.id} className={`bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 overflow-hidden certificate-card ${
+                certificateViewMode === 'list' ? 'flex flex-row' : 'flex flex-col'
+              }`}>
+                {/* PDF Preview */}
+                <div className={`bg-gray-100 flex items-center justify-center certificate-preview ${
+                  certificateViewMode === 'list' 
+                    ? 'w-24 h-24 flex-shrink-0' 
+                    : certificateViewMode === 'tiles' 
+                    ? 'h-48' 
+                    : 'h-64'
+                }`}>
+                  <iframe
+                    src={`${cert.file}#toolbar=0&navpanes=0&scrollbar=0`}
+                    className="w-full h-full border-0"
+                    title={cert.name}
+                  />
+                </div>
+                
+                {/* Certificate Info */}
+                <div className={`p-4 ${certificateViewMode === 'list' ? 'flex-1' : ''}`}>
+                  <div className="flex justify-between items-start mb-2">
+                    <h4 className={`font-bold text-gray-800 ${
+                      certificateViewMode === 'list' ? 'text-sm' : 'text-lg'
+                    }`}>
+                      {cert.name}
+                    </h4>
+                    <span className={`text-gray-500 font-medium ${
+                      certificateViewMode === 'list' ? 'text-xs' : 'text-sm'
+                    }`}>
+                      {cert.date}
+                    </span>
+                  </div>
+                  
+                  <div className={`text-blue-700 font-semibold mb-2 ${
+                    certificateViewMode === 'list' ? 'text-xs' : 'text-sm'
+                  }`}>
+                    {cert.type}
+                  </div>
+                  
+                  <p className={`text-gray-600 mb-3 ${
+                    certificateViewMode === 'list' ? 'text-xs line-clamp-2' : 'text-sm'
+                  }`}>
+                    {cert.description}
+                  </p>
+                  
+                  <div className={`text-gray-500 mb-4 ${
+                    certificateViewMode === 'list' ? 'text-xs' : 'text-sm'
+                  }`}>
+                    <strong>Issuer:</strong> {cert.issuer}
+                  </div>
+                  
+                  {/* Action Buttons */}
+                  <div className="flex space-x-2">
+                    <a
+                      href={cert.file}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`bg-blue-700 text-white px-3 py-2 rounded hover:bg-blue-800 transition-colors flex items-center ${
+                        certificateViewMode === 'list' ? 'text-xs' : 'text-sm'
+                      }`}
+                    >
+                      <ExternalLink size={certificateViewMode === 'list' ? 12 : 16} className="mr-1" />
+                      View
+                    </a>
+                    <a
+                      href={cert.file}
+                      download
+                      className={`border border-blue-700 text-blue-700 px-3 py-2 rounded hover:bg-blue-50 transition-colors flex items-center ${
+                        certificateViewMode === 'list' ? 'text-xs' : 'text-sm'
+                      }`}
+                    >
+                      <Download size={certificateViewMode === 'list' ? 12 : 16} className="mr-1" />
+                      Download
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Print-only: Chronological History */}
+      <div className="hidden print:block print-break-before">
+        <div className="p-8">
+          <div className="print-break-before">
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">{content.timeline.title}</h3>
+            <p className="text-gray-600 mb-8 text-lg">{content.timeline.subtitle}</p>
+          </div>
+          
+          <div className="relative">
+            {/* Timeline line positioned exactly through the center of the blue circles */}
+            <div className="absolute w-0.5 bg-blue-700" style={{left: '23px', top: '24px', bottom: '0'}}></div>
+            
+            <div className="space-y-8">
+              {content.timeline.jobs.map((job, index) => (
+                <div key={index} className="flex items-start relative">
+                  {/* Clock icon positioned to align with the vertical line */}
+                  <div className="flex-shrink-0 w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center relative shadow-sm">
+                    <Clock size={20} className="text-white" />
+                  </div>
+                  <div className="ml-6 flex-1">
+                    <div className="bg-white p-6 border border-gray-200 rounded-lg shadow-sm">
+                      <div className="flex justify-between items-start mb-3">
+                        <h4 className="font-bold text-gray-800 text-lg">{job.position}</h4>
+                        <span className="text-gray-600 font-medium">{job.period}</span>
+                      </div>
+                      <p className="text-blue-700 font-semibold mb-3">{job.company}</p>
+                      <p className="text-gray-700 leading-relaxed">
+                        {job.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Footer */}
-      <div className="bg-gray-50 p-6 text-center text-gray-600 border-t">
+      <div className="bg-gray-50 p-6 text-center text-gray-600 border-t print-footer">
         <p className="text-lg">{content.footer}</p>
       </div>
     </div>

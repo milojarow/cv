@@ -4,22 +4,117 @@
 
 /* Print styles for CV */
 @media print {
-  body {
-    background: white !important;
+  /* Reset everything for print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   
-  .no-print {
+  body {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Hide interactive elements */
+  .no-print,
+  .language-toggle,
+  .tab-navigation,
+  .view-mode-toggle,
+  button:not(.print-button) {
     display: none !important;
+  }
+  
+  /* Hide tab content borders and make all tabs visible */
+  .tab-content-border {
+    display: none !important;
+  }
+  
+  /* Show all content sections */
+  .print-show-all > div {
+    display: block !important;
+  }
+  
+  /* Remove card styling for print */
+  .cv-card {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+  
+  /* Header adjustments */
+  .print-header {
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Remove hover effects and transitions */
+  *:hover,
+  .transition-all,
+  .transition-colors,
+  .transition-shadow {
+    transition: none !important;
+  }
+  
+  /* Static typewriter text */
+  .typewriter-print {
+    display: none !important;
+  }
+  
+  /* Section spacing for print */
+  .print-section {
+    margin-bottom: 2rem !important;
+    page-break-inside: avoid;
+  }
+  
+  /* Certificate adjustments for print */
+  .certificate-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .certificate-card {
+    flex-direction: row !important;
+    box-shadow: none !important;
+    border: 1px solid #e5e5e5 !important;
+    margin-bottom: 1rem !important;
+    page-break-inside: avoid;
+  }
+  
+  .certificate-preview {
+    width: 120px !important;
+    height: 120px !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Page breaks */
+  .print-break-before {
+    page-break-before: always;
   }
   
   .print-break-after {
     page-break-after: always;
   }
   
-  /* Ensure proper printing of colors */
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+  /* Typography adjustments */
+  h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+  }
+  
+  /* Footer adjustments */
+  .print-footer {
+    margin-top: 2rem !important;
+    text-align: center !important;
+    font-size: 0.9rem !important;
   }
 }
 

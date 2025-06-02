@@ -4,14 +4,15 @@ export const contentEng = {
   header: {
     name: "ROLANDO AHUJA MARTÍNEZ",
     title: "Mechatronics Engineer | Process Optimization Specialist",
-    location: "Nuevo Laredo, Tamaulipas",
+    location: "Reynosa, Tamaulipas, México, 88730",
     email: "ahuja@hush.com",
-    phone: "867-181-2166"
+    phone: "🇲🇽 +52 867-181-2166"
   },
   
   tabs: {
     profile: "Professional Profile",
-    history: "Chronological History"
+    history: "Chronological History",
+    certificates: "Certificates & Credentials"
   },
   
   sections: {
@@ -148,6 +149,45 @@ export const contentEng = {
         {
           name: "Fixture Development for Manufacturing Optimization",
           description: "Used Solid Edge to design specialized fixtures that improved precision and efficiency in manufacturing processes, reducing cycle times by 18% and improving ergonomics for operators."
+        }
+      ]
+    },
+    
+    certificates: {
+      title: "CERTIFICATES & CREDENTIALS",
+      description: "Official academic credentials and professional certifications validating educational background and technical expertise.",
+      viewModes: {
+        list: "List View",
+        tiles: "Tiles View", 
+        large: "Large Icons"
+      },
+      items: [
+        {
+          id: "bachelor_degree",
+          name: "International Evaluation - Bachelor Degree in Mechatronics",
+          description: "Official evaluation validating Mexican Bachelor's Degree in Mechatronics Engineering for United States equivalency",
+          file: "/bachelor_degree_in_mechatronics.pdf",
+          type: "International Credential Evaluation",
+          issuer: "Credential Evaluation Service",
+          date: "2024"
+        },
+        {
+          id: "cedula_profesional",
+          name: "Professional License (Cédula Profesional)",
+          description: "Official professional license to practice engineering in Mexico - License #11716565",
+          file: "/cedula_profesional.pdf", 
+          type: "Professional License",
+          issuer: "Mexican Government - SEP",
+          date: "2018"
+        },
+        {
+          id: "titulo_universitario",
+          name: "University Degree Certificate (Título Universitario)",
+          description: "Official university degree certificate in Mechatronics Engineering from Instituto Tecnológico de Nuevo Laredo",
+          file: "/título_profesional.pdf",
+          type: "Academic Degree",
+          issuer: "Instituto Tecnológico de Nuevo Laredo",
+          date: "2018"
         }
       ]
     }

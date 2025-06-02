@@ -4,14 +4,15 @@ export const contentEsp = {
   header: {
     name: "ROLANDO AHUJA MARTÍNEZ",
     title: "Ingeniero Mecatrónico | Especialista en Optimización de Procesos",
-    location: "Nuevo Laredo, Tamaulipas",
+    location: "Reynosa, Tamaulipas, México, 88730",
     email: "ahuja@hush.com",
-    phone: "867-181-2166"
+    phone: "🇲🇽 +52 867-181-2166"
   },
   
   tabs: {
     profile: "Perfil Profesional",
-    history: "Historial Cronológico"
+    history: "Historial Cronológico",
+    certificates: "Certificados y Credenciales"
   },
   
   sections: {
@@ -148,6 +149,45 @@ export const contentEsp = {
         {
           name: "Desarrollo de Fixtures para Optimización de Manufactura",
           description: "Utilicé Solid Edge para diseñar fixtures especializados que mejoraron la precisión y eficiencia en procesos de manufactura, reduciendo tiempos de ciclo en un 18% y mejorando la ergonomía para operadores."
+        }
+      ]
+    },
+    
+    certificates: {
+      title: "CERTIFICADOS Y CREDENCIALES",
+      description: "Credenciales académicas oficiales y certificaciones profesionales que validan antecedentes educativos y experiencia técnica.",
+      viewModes: {
+        list: "Vista Lista",
+        tiles: "Vista Mosaicos",
+        large: "Iconos Grandes"
+      },
+      items: [
+        {
+          id: "bachelor_degree",
+          name: "Evaluación Internacional - Licenciatura en Mecatrónica",
+          description: "Evaluación oficial que valida el título de Ingeniero en Mecatrónica mexicano para equivalencia en Estados Unidos",
+          file: "/bachelor_degree_in_mechatronics.pdf",
+          type: "Evaluación de Credencial Internacional",
+          issuer: "Servicio de Evaluación de Credenciales",
+          date: "2024"
+        },
+        {
+          id: "cedula_profesional",
+          name: "Licencia Profesional (Cédula Profesional)",
+          description: "Licencia profesional oficial para ejercer la ingeniería en México - Cédula #11716565",
+          file: "/cedula_profesional.pdf",
+          type: "Licencia Profesional",
+          issuer: "Gobierno Mexicano - SEP",
+          date: "2018"
+        },
+        {
+          id: "titulo_universitario",
+          name: "Certificado de Título Universitario",
+          description: "Certificado oficial de título universitario en Ingeniería Mecatrónica del Instituto Tecnológico de Nuevo Laredo",
+          file: "/título_profesional.pdf",
+          type: "Título Académico",
+          issuer: "Instituto Tecnológico de Nuevo Laredo",
+          date: "2018"
         }
       ]
     }
