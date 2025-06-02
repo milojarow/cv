@@ -13,10 +13,12 @@ Este es un sitio web personal para mostrar mi CV profesional de manera interacti
 ## 📋 Características
 
 - Diseño responsive que se adapta a todos los dispositivos
+- **Versión bilingüe (Inglés/Español)** con cambio instantáneo
 - Dos vistas: Perfil Profesional e Historial Cronológico
-- Interfaz moderna con tema corporativo
+- Interfaz moderna con diseño profesional
 - Optimizado para impresión
 - Carga rápida y SEO optimizado
+- **Inglés como idioma por defecto**
 
 ## 🛠️ Instalación Local
 

@@ -2,12 +2,12 @@ import "./globals.css";
 
 export const metadata = {
   title: "Rolando Ahuja Martínez - CV",
-  description: "Ingeniero Mecatrónico | Especialista en Optimización de Procesos",
-  keywords: "ingeniero mecatrónico, manufactura, procesos, optimización, Rolando Ahuja",
+  description: "Mechatronics Engineer | Process Optimization Specialist",
+  keywords: "mechatronics engineer, manufacturing, process optimization, Rolando Ahuja",
   authors: [{ name: "Rolando Ahuja Martínez" }],
   openGraph: {
     title: "Rolando Ahuja Martínez - CV",
-    description: "Ingeniero Mecatrónico con experiencia en optimización de procesos de manufactura",
+    description: "Mechatronics Engineer with experience in manufacturing process optimization",
     type: "website",
   },
 };
